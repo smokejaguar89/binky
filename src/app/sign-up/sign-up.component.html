@@ -1,0 +1,73 @@
+<div class="container">
+	<md-card class="card">
+		<div class="img-circle"></div>
+		<form>
+
+			<md-input-container>
+		  		<input mdInput placeholder="First name" [(ngModel)]="model.first_name" name="first_name" required>
+		    </md-input-container>
+
+			<md-input-container>
+		  		<input mdInput placeholder="Last name" [(ngModel)]="model.last_name" name="last_name" required>
+		    </md-input-container>
+
+			<md-input-container>
+		  		<input mdInput placeholder="Username" [(ngModel)]="model.username" name="username" required>
+		    </md-input-container>
+
+			<md-input-container>
+		  		<input mdInput placeholder="E-Mail" [(ngModel)]="model.email" name="email" required>
+		    </md-input-container>
+
+			<md-select placeholder="University" [(ngModel)]="model.userprofile.uni" name="uni" class="full-width">
+			  <md-option [value]="[]" class="full-width">
+			    All
+			  </md-option>
+			  <md-option *ngFor="let uni of unis" [value]="uni" class="full-width">
+			    {{ uni.name }}
+			  </md-option>
+			</md-select>
+
+
+			  <md-input-container class="full-width">
+		      	<input mdInput placeholder="Skill" [mdAutocomplete]="auto" [formControl]="stateCtrl">
+		      </md-input-container>
+
+		      <md-autocomplete #auto="mdAutocomplete">
+				  <md-option *ngFor="let skill of filteredStates | async" [value]="EMPTY_STRING" (click)="pushSkillToSkills(skill)">
+				    {{ skill.name }}
+				  </md-option>
+			  </md-autocomplete>
+
+			<md-chip-list *ngFor="let skill of model.userprofile.skills">
+
+				<md-chip color="accent" (click)="removeSkillFromSkills(skill)" class="float">
+					{{ skill.name }}
+				</md-chip>
+
+			</md-chip-list>
+
+			<md-input-container>
+		  		<input mdInput placeholder="Degree" [(ngModel)]="model.userprofile.degree" name="degree" required>
+		    </md-input-container>
+
+		    <md-input-container>
+		    	<input type="password" mdInput placeholder="Password" [(ngModel)]="model.password" name="password" required>
+		    </md-input-container>
+
+		    <md-input-container>
+		    	<input type="password" mdInput placeholder="Repeat password" [(ngModel)]="repeat_password" name="repeat_password" required>
+		    </md-input-container>
+
+			<md-card-actions>
+				<button md-raised-button color="primary" [disabled]="submitted" (click)='onSubmit()'>SIGN UP</button>
+			</md-card-actions>
+
+		</form>
+
+		<div *ngIf="fail">
+			{{ errorMessage }}
+		</div>
+
+	</md-card>
+</div>

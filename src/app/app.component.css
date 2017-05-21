@@ -1,0 +1,101 @@
+body {
+  height:100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* align items in Main Axis */
+  align-items: stretch; /* align items in Cross Axis */
+  align-content: stretch; /* Extra space in Cross Axis */
+  height:100%;         
+}
+
+.sidenav-header {
+  width:100%;
+  box-sizing: border-box;
+  padding:20px;
+  background-image:url('https://s-media-cache-ak0.pinimg.com/originals/a9/aa/6e/a9aa6e313a3ef06a6ba3909cfbe9be21.png');
+  background-size:cover;
+  overflow:auto;
+}
+
+.img-circle {
+  width:80px;
+  height:80px;
+  margin-right:6px;
+  border-radius: 80px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  background-position:center;
+  background-size: cover;
+  cursor:pointer;
+}
+
+.sidenav-row {
+  float:left;
+  width:100%;
+  box-sizing: border-box;
+  overflow:auto;
+  color:white;
+}
+
+.sidenav-fab-container {
+  flex:1;
+}
+
+.sidenav-fab-container md-sidenav {
+  width: 320px;
+}
+
+.sidenav-fab-container .mat-sidenav-content,
+.sidenav-fab-container md-sidenav {
+  display: flex;
+  overflow: visible;
+}
+
+.scrolling-content {
+  overflow: auto;
+}
+
+md-list {
+  color:#666666;
+  padding-top:0;
+}
+
+md-list-item {
+  cursor:pointer;
+  width:320px;
+  color:#666666;
+}
+
+md-list-item:hover {
+  background-color:#f1f1f1;
+}
+
+.fab {
+  position: fixed;
+  right: 20px;
+  bottom: 10px;
+}
+
+.fill-remaining-space {
+  // This fills the remaining space, by using flexbox. 
+  // Every toolbar row uses a flexbox row layout.
+  flex: 1 1 auto;
+}
+
+md-toolbar {
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12)
+}
+
+.img-circle {
+  width:80px;
+  height:80px;
+  margin-right:6px;
+  margin-bottom:40px;
+  border-radius: 80px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  background-position:center;
+  background-size: cover;
+  cursor:pointer;
+}

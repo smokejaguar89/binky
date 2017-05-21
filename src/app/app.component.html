@@ -1,0 +1,48 @@
+<div class="container">
+
+	<md-sidenav-container class="sidenav-fab-container">
+
+		<md-toolbar color="primary">
+			<button md-icon-button (click)="sidenav.toggle()">
+			  <md-icon>menu</md-icon>
+			</button>
+			  <span style="padding-left:10px">{{title}}</span>
+
+			  <!-- This fills the remaining space of the current row -->
+			   <span class="fill-remaining-space"></span>
+
+		</md-toolbar>
+
+		  <md-sidenav #sidenav mode="over" opened="false">
+		  	<div class="sidenav-header">
+				<div style="background-image:url('https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAu3AAAAJDk3YmE4ODdiLTY5N2EtNDkwYS04MmM4LTQyOTIzZjAwMzNkYw.jpg')"
+					class="img-circle"></div>
+
+				<div class="sidenav-row">Nicholas James Hall<br>theologue@gmail.com</div>
+				
+
+		  	</div>
+			<md-list>
+			  <md-list-item *ngFor="let hyperlink of hyperlinks" [routerLink]="hyperlink.url" (click)="sidenav.toggle()">
+			  	<i style="padding-right:20px;" class="material-icons">{{ hyperlink.icon }}</i>
+			    {{hyperlink.name}}
+			  </md-list-item>
+			  <md-list-item *ngIf="isLoggedIn" (click)="logOut(); sidenav.toggle()">
+			  	<i style="padding-right:20px;" class="material-icons">cloud_off</i>
+			    Log out
+			  </md-list-item>
+
+			</md-list>
+		  </md-sidenav>
+
+		  <router-outlet></router-outlet>
+
+	</md-sidenav-container>
+
+	<button md-fab class="fab" 
+		mdTooltip="Create a project!"
+		mdTooltipPosition="before">
+		<md-icon>mode_edit</md-icon>
+	</button>
+
+</div>

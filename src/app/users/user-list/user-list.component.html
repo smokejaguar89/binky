@@ -1,0 +1,93 @@
+<div class="wrapper">
+		<form class="filter-container" [formGroup]="form">
+
+		<div class="flex-row">
+
+		  <md-select placeholder="University" formControlName="uni" name="university" class="full-width">
+		  	<md-option [value]="null" class="full-width">
+		  		All
+		  	</md-option>
+		    <md-option *ngFor="let uni of formResources.unis" [value]="uni" class="full-width">
+		      {{ uni.name }}
+		    </md-option>
+		  </md-select>
+
+	  	</div>
+
+		<div class="flex-row">
+
+		  <md-select placeholder="Location" formControlName="location" name="location" class="full-width">
+		  	<md-option [value]="null" class="full-width">
+		  		All
+		  	</md-option>
+		    <md-option *ngFor="let loc of formResources.locations" [value]="loc" class="full-width">
+		      {{ loc.name }}
+		    </md-option>
+		  </md-select>
+
+	  	</div>
+
+	  	<div class="flex-row">
+
+		  <md-input-container class="full-width">
+	      	<input mdInput placeholder="Skill" [mdAutocomplete]="auto" formControlName="skills">
+	      </md-input-container>
+
+	      <md-autocomplete #auto="mdAutocomplete">
+			  <md-option *ngFor="let skill of filteredSkills | async" [value]="EMPTY_STRING" (click)="pushSkillToSkills(skill)">
+			    {{ skill.name }}
+			  </md-option>
+		  </md-autocomplete>
+
+	      </div>
+
+	      <div class="float-row">
+
+			<md-chip-list *ngFor="let skill of selectedSkills">
+
+				<md-chip color="accent" (click)="removeSkillFromSkills(skill)" class="float">
+					{{ skill.name }}
+				</md-chip>
+
+			</md-chip-list>
+
+		  </div>
+	      <div class="flex-row">
+
+	      <button md-raised-button color="accent" (click)="getRecommended()" class="button">Recommended</button>
+	      <button md-raised-button color="primary" (click)="getUsers()" class="button">Search</button>
+
+	      </div>
+
+		</form>
+
+	<div class="flex-column">
+
+		<md-card class="card" *ngFor="let user of users">
+			<md-card-content>
+				 <div class="project-container">
+
+				 	<div class="project-image">
+				 		<div [routerLink]="['/user/'+user.id]" [ngStyle]="{'background-image': 'url(' + user?.userprofile.img + ')'}"
+						class="img-circle"></div>
+				 	</div>
+					<div class="project-content">
+						<h3>{{ user?.first_name }} {{ user?.last_name }}</h3>
+						<p>Studies <b>{{ user?.userprofile.degree }}</b> at <b>{{ user?.userprofile.uni.name }}</b></p>
+						<md-chip-list>
+							<md-chip *ngFor="let skill of user?.userprofile.skills">
+								{{ skill.name }}
+							</md-chip>
+						</md-chip-list>
+					</div>
+
+				 </div>
+			</md-card-content>
+		<md-card-actions>
+			<button md-button [routerLink]="['/user/'+user.id]" color="primary">SEE MORE</button>
+			<button md-button>CONTACT</button>
+		</md-card-actions>
+		</md-card>
+
+	</div>
+</div>

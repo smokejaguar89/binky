@@ -1,0 +1,83 @@
+<div class="container">
+
+	<div class="header-container">
+		<div class="header-image" [ngStyle]="{'background-image': 'url(' + user?.userprofile.img + ')'}"></div>
+		<h2>{{ user?.first_name }} {{ user?.last_name }}</h2>
+		<p>Studies <b>{{ user?.userprofile.degree }}</b> at <b>{{ user?.userprofile.uni.name }}</b></p>
+		<p>{{ user?.userprofile.desc }}</p>
+		<div *ngIf="isProfileOwner" class="action-icon" (click)="editProfile()"><i class="material-icons">mode_edit</i></div>
+	</div>
+
+	<div class="skill-container">
+		<md-chip-list>
+		  <md-chip *ngFor="let skill of user?.userprofile.skills">
+		    {{skill.name}}
+		  </md-chip>
+		</md-chip-list>
+	</div>
+
+	<div class="content-container">
+
+		<div class="column">
+
+			<h2>Posts</h2>
+
+			<form *ngIf="isProfileOwner">
+
+			<md-card class="card">
+					<md-input-container>
+				  		<textarea class="textarea" mdInput mdTextareaAutosize minRows=4 placeholder="What's on your mind?" [(ngModel)]="postContent" name="post"></textarea>
+				    </md-input-container>
+					<md-card-actions>
+						<button md-button (click)="writePost()" color="primary">POST</button>
+						<button md-button>UPLOAD IMAGE</button>
+					</md-card-actions>
+			</md-card>
+
+			</form>
+
+			<md-card class="card" *ngFor="let post of user?.posts.slice().reverse()">
+				<!-- <md-icon *ngIf="post.img && post.category=='event'">{{post.img}}</md-icon> -->
+
+					<div *ngIf="isProfileOwner && post.category == 'post'" class="action-icon" (click)="deletePost(post.id)"><i class="material-icons">delete</i></div>
+				
+					<md-card-subtitle>
+						{{ post.creation_date | date:'fullDate'}}
+					</md-card-subtitle>
+				
+				 <img md-card-image src={{post.img}} *ngIf="post.img">
+				 <md-card-content>
+				 	<p>{{ post.content }}</p>
+				</md-card-content>
+			</md-card>		
+
+		</div>
+
+		<div class="column">
+
+			<h2>Projects</h2>
+
+			<md-card class="card" *ngFor="let project of user?.projects">
+				<md-card-content>
+					 <div class="project-container">
+
+					 	<div class="project-image">
+					 		<div [routerLink]="['/project/'+project.id]" [ngStyle]="{'background-image': 'url(' + project.img + ')'}"
+							class="img-circle"></div>
+					 	</div>
+						<div class="project-content">
+							<h3>{{ project.name }}</h3>
+							<p>{{ project.desc }}</p>
+						</div>
+
+					 </div>
+				</md-card-content>
+				<md-card-actions>
+					<button md-button [routerLink]="['/project/'+project.id]" color="primary">SEE MORE</button>
+					<button md-button>CONTACT</button>
+				</md-card-actions>
+			</md-card>
+
+		</div>
+	</div>
+</div>

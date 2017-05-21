@@ -1,0 +1,93 @@
+<div class="wrapper">
+		<form class="filter-container">
+
+		<div class="flex-row">
+
+		  <md-select placeholder="Category" [(ngModel)]="filterCategories" name="category" class="full-width">
+		  	<md-option [value]="[]" class="full-width">
+		  		All
+		  	</md-option>
+		    <md-option *ngFor="let category of categories" [value]="[ category ]" class="full-width">
+		      {{ category.name }}
+		    </md-option>
+		  </md-select>
+
+	  	</div>
+
+		<div class="flex-row">
+
+		  <md-select placeholder="Location" [(ngModel)]="filterLocations" name="location" class="full-width">
+		  	<md-option [value]="[]" class="full-width">
+		  		All
+		  	</md-option>
+		    <md-option *ngFor="let location of locations" [value]="[ location ]" class="full-width">
+		      {{ location.name }}
+		    </md-option>
+		  </md-select>
+
+	  	</div>
+
+	  	<div class="flex-row">
+
+		  <md-input-container class="full-width">
+	      	<input mdInput placeholder="Skill" [mdAutocomplete]="auto" [formControl]="stateCtrl">
+	      </md-input-container>
+
+	      <md-autocomplete #auto="mdAutocomplete">
+			  <md-option *ngFor="let skill of filteredStates | async" [value]="EMPTY_STRING" (click)="pushSkillToSkills(skill)">
+			    {{ skill.name }}
+			  </md-option>
+		  </md-autocomplete>
+
+	      </div>
+	      <div class="float-row">
+
+			<md-chip-list *ngFor="let skill of filterSkills">
+
+				<md-chip color="accent" (click)="removeSkillFromSkills(skill)" class="float">
+					{{ skill.name }}
+				</md-chip>
+
+			</md-chip-list>
+
+		  </div>
+	      <div class="flex-row">
+
+	      <button md-raised-button color="accent" (click)="getRecommended()" class="button">Recommended</button>
+	      <button md-raised-button color="primary" (click)="getProjects()" class="button">Search</button>
+
+	      </div>
+
+		</form>
+
+	<div *ngIf="notFound">
+		No Projects Found
+	</div>
+
+	<div class="flex-column">
+
+		<md-card class="card" *ngFor="let project of projects">
+			<md-card-content>
+				 <div class="project-container">
+
+				 	<div class="project-image">
+				 		<div [routerLink]="['/project/'+project.id]" [ngStyle]="{'background-image': 'url(' + project.img + ')'}"
+						class="img-circle"></div>
+				 	</div>
+					<div class="project-content">
+						<h3>{{ project.name }}</h3>
+						<p>{{ project.desc }}</p>
+					</div>
+
+				 </div>
+			</md-card-content>
+			<md-card-actions>
+				<button md-button [routerLink]="['/project/'+project.id]" color="primary">SEE MORE</button>
+			</md-card-actions>
+		</md-card>
+
+	</div>
+
+
+</div>
+

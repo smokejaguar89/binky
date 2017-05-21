@@ -1,0 +1,42 @@
+.container {
+
+}
+
+.card {
+	margin:auto;
+	margin-top:80px;
+	width:420px;
+	padding:20px;
+	padding-top:80px;
+}
+
+md-input-container {
+	width:100%;
+	height:70px;
+	box-sizing: border-box;
+}
+
+md-card-actions {
+	text-align: center;
+	padding:20px;
+}
+
+.img-circle {
+  width:120px;
+  height:120px;
+  margin-right:6px;
+  margin-bottom:40px;
+  border-radius: 120px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  background-position:center;
+  background-size: cover;
+  background-image:url('https://maxcdn.icons8.com/Share/icon/Logos//google_logo1600.png');
+  background-color:white;
+  position:absolute;
+  top:-60px;
+  left:180px;
+}
+
+button {
+	width:180px;
+}
